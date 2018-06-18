@@ -1,0 +1,52 @@
+\begin{table}[h]
+    \caption{
+        File counts. Expected values came from corresponding weekly RC
+        exections. Symbol \dag{} dentoes dataset types which differs from
+        weekly execution and \ddag{} indicates DESDM specific dataset types.
+    }
+    \label{tab:count}
+    \small
+    \begin{center}
+    \begin{tabular}{lrrrrrr}
+        \hline\hline
+                                                  &
+        \multicolumn{2}{c}{\textbf{tract 8766}}   &
+        \multicolumn{2}{c}{\textbf{tract 8767}}   &
+        \multicolumn{2}{c}{\textbf{tract 9813}}   \\
+        %
+        \multicolumn{1}{c}{\textbf{Dataset type}} &
+        \multicolumn{1}{c}{\textit{expected}}     &
+        \multicolumn{1}{c}{\textit{actual}}       &
+        \multicolumn{1}{c}{\textit{expected}}     &
+        \multicolumn{1}{c}{\textit{actual}}       &
+        \multicolumn{1}{c}{\textit{expected}}     &
+        \multicolumn{1}{c}{\textit{actual}}       \\
+        \hline\hline
+        cat\_corr\_src\dag & -- & 3850 & -- & 3956 & -- & 24103 \\
+        deepcoadd\dag & -- & 405 & -- & 405 & -- & 465 \\
+        deepcoadd\_calexp & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_calexp\_bkg & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_det & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_directwarp & --  & 2276 & -- & 2389 & -- & 15873 \\
+        deepcoadd\_forced\_src & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_meas & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_measmatch & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_measmatchfull & 405 & 405 & 405 & 405 & 465 & 465 \\
+        deepcoadd\_mergedet & 81 & 81 & 81 & 81 & 79 & 79 \\
+        deepcoadd\_ref & 81 & 81 & 81 & 81 & 79 & 79 \\
+        img\_corr\dag & -- & 3850 & -- & 3956 & -- & 24103 \\
+        list\ddag & 3297 & 3297 & 3403 & 3403 & 17415 & 17415 \\
+        log\ddag & 7957 & 7957 & 8169 & 8169 & 42448 & 42448 \\
+        processccd\_md\_boost & -- & 3850 & -- & 3956 & -- & 24103 \\
+        sfm\_calexpbkgd & -- & 3850 & -- & 3956 & -- & 24103 \\
+        sfm\_flattened\_thumb & -- & 3850 & -- & 3956 & -- & 24103 \\
+        sfm\_oss\_thumb & -- & 3850 & -- & 3956 & -- & 24103 \\
+        sfm\_srcmatch & -- & 3850 & -- & 3956 & -- & 24103 \\
+        sfm\_srcmatchfull & -- & 3850 & -- & 3956 & -- & 24103 \\
+        wcl\ddag & 3 & 3 & 3 & 3 & 3 & 3 \\
+        \hline
+        totals & -- & 50656 & -- & 52041 & -- & 273375 \\
+        \hline\hline
+    \end{tabular}
+    \end{center}
+\end{table}

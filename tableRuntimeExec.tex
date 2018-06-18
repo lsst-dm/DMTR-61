@@ -1,0 +1,57 @@
+\begin{table}
+    \caption{
+      The CPU time used by each executable in each tract.
+      Also shown is the maximum resident set size (RSS) --- corresponding to the maximum amount of main memory --- used by each executable
+    }
+    \label{tab:runtimeExec}
+    \small
+    \begin{center}
+    \begin{tabular}{lrrrr}
+        \hline\hline
+        \textbf{Executable}                &
+        \textbf{Execution}                 &
+        \textbf{User Time}                 &
+        \textbf{System Time}               &
+        \textbf{Maximum RSS}               \\
+                                           &
+        \textbf{count}                     &
+        \multicolumn{1}{c}{\textbf{(min)}} &
+        \multicolumn{1}{c}{\textbf{(min)}} &
+        \multicolumn{1}{c}{\textbf{(kB)}}  \\
+
+        \hline\hline
+        \multicolumn{5}{c}{\textbf{tract 8766}} \\
+        processCcd.py & 3850 & 9390.55 & 332.29 & 1956920 \\
+        makeCoaddTempExp.py & 2325&1073.35 & 185.30 & 1113296 \\
+        assembleCoadd.py & 405 & 665.03 & 63.54 & 1820116 \\
+        detectCoaddSources.py & 405 & 56.12 & 18.79 & 955692 \\
+        mergeCoaddDetections.py & 81 & 27.92 & 3.45 &   462000 \\
+        measureCoaddSources.py & 405 & 9529.12 & 32.96 & 3694980 \\
+        mergeCoaddMeasurements.py & 81 & 31.46 & 4.70 & 1741084 \\
+        forcedPhotCoadd.py & 405 & 2794.00 & 25.90 & 2196376 \\
+
+        \hline
+        \multicolumn{5}{c}{\textbf{tract 8767}} \\
+        processCcd.py & 3956 & 9262.97 & 331.62 & 1911480 \\
+        makeCoaddTempExp.py & 2431 & 1104.69 & 253.26 & 1117804 \\
+        assembleCoadd.py & 405 & 687.55 & 66.34 & 1894980 \\
+        detectCoaddSources.py & 405 & 56.19 & 19.12 & 953240 \\
+        mergeCoaddDetections.py & 81 & 28.14 & 3.56 & 463896 \\
+        measureCoaddSources.py & 405 & 8718.07 & 35.31 & 3594972 \\
+        mergeCoaddMeasurements.py & 81 & 30.14 & 4.68 & 2188696 \\
+        forcedPhotCoadd.py & 405 & 2807.30 & 25.85 & 2166484 \\
+
+        \hline
+        \multicolumn{5}{c}{\textbf{tract 9813}} \\
+        processCcd.py & 24103 & 64001.65 & 2091.06 &   1942904 \\
+        makeCoaddTempExp.py & 16327 & 6329.18 & 1044.22 &  1128420 \\
+        assembleCoadd.py & 465 & 3900.33 & 383.54 &   7476556 \\
+        detectCoaddSources.py & 465 & 70.59 & 23.92 & 1035160 \\
+        mergeCoaddDetections.py & 79 & 57.24 & 3.80 &   512504 \\
+        measureCoaddSources.py & 465 & 31375.48 & 83.69 & 12747664 \\
+        mergeCoaddMeasurements.py & 79 &  47.45 & 6.53 &   4746248 \\
+        forcedPhotCoadd.py & 465 & 12994.67 & 49.43 &   4489536 \\
+        \hline\hline
+    \end{tabular}
+    \end{center}
+\end{table}
