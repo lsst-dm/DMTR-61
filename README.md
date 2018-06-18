@@ -1,2 +1,2 @@
 # DMTR-61
-LDM-503-4 Test Report
+Test Report for LDM-503-4 and LDM-503-4b

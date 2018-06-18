@@ -1,0 +1,317 @@
+\documentclass[DM,lsstdraft,STR,toc]{lsstdoc}
+\input meta.tex
+\usepackage{enumitem}
+\begin{document}
+
+\def\milestoneName{Raw Image Archiving Test}
+\def\milestoneId{LDM-503-4 and LDM-503b} 
+\def\product{LSST DM Raw Image Archiving Service}
+
+\setDocCompact{true}
+
+\title[\milestoneId{}~Test Report]{\milestoneId{} (\milestoneName{})~Test Report}
+\setDocRef{\lsstDocType-\lsstDocNum}
+\setDocDate{\vcsdate}
+\setDocUpstreamLocation{\url{https://github.com/lsst/lsst-texmf/examples}}
+\author{% `git log --pretty=%an | sort --key=2 | uniq` ?
+  Jim Parsons,
+  Michelle Gower,
+  Michelle Butler
+}
+
+% Most recent last
+\setDocChangeRecord{
+\addtohist{1}{2018-01-11}{Initial version.}{Parsons, Gower, Butler.}
+\addtohist{1.1}{2018-01-11}{Implementation of \jira{RFC-425}}{T.~Jenness}
+}
+
+\setDocCurator{Michelle Butler}
+\setDocUpstreamLocation{\url{https://github.com/lsst-dm/\lsstDocType-\lsstDocNum}}
+\setDocUpstreamVersion{\vcsrevision}
+
+
+\setDocAbstract{
+This is the test report for \milestoneId{} (\milestoneName{}), a milestone pertaining to the \product{}.
+}
+
+\maketitle
+
+\section{Introduction}
+\label{sect:intro}
+
+\subsection{Objectives}
+\label{sect:objectives}
+
+This document describes the results of tests carried out in early (calendar) 2018 on the \product{} in order to assess progress against the LSST milestone \milestoneId{}.
+We report here on the success or failure of applicable test cases and assess the state of the software and services tested.
+
+\subsection{Scope}
+\label{sect:scope}
+
+The overall test plan for the LSST Data Management system is described in \citeds{LDM-503}.
+This document specifically refers to the early (calendar) 2018 milestone \milestoneId{}, which tests initial versions of the \product{}.
+The overall \product{} test specification is defined in \citeds{LDM-538}.
+The test plan for \milestoneId{} involves the execution of the acquistion of a image and storing the image to the Data BackBone,  including the following test cases:
+
+\begin{description}
+
+  \item[RAS-00-00]{Tests that well-formed raw-image can be written }
+  \item[RAS-00-10]{Tests that the  raw image can be accessed via the OODS}
+  \item[RAS-00-20]{Tests that the raw image has been archived in the DBB}
+  \item[RAS-00-30]{Overall testing of availabliity, throughput, reliability and heterogeneity}
+
+\end{description}
+
+\subsection{System Overview}
+\label{sect:systemoverview}
+
+The \product{} is that part of the LSST Data Management system which will be responsible for acquiring images from the DAQ and transferring them into the permanent record of the survey during  LSST operations.  
+
+\begin{itemize}
+
+
+  \item{
+NOTE: we may broadly think of the \product{} as consisting of two independent parts: the Raw Image Service(and OODS), which provides the getting of the image and building the image with well formed headers, and the Data Backbone Services, which include data storage, management, and replication services providing the permanent record of the survey.  The \milestoneId{} milestone only exercises portions of the Raw Image Archiving Service. 
+}
+ \item{
+These milestones do not include testing of:
+}
+ \item{
+* raw image handoff to or access from the Observatory Observation Data Service (RAS-00-10)
+}
+ \item{
+* availabliity, throughput, reliability and heterogeneity requirements  (RAS-00-30)
+  }
+\end{itemize}
+
+
+\subsection{Applicable Documents}
+\label{sect:appdocs}
+\addtocounter{table}{-1}
+
+\begin{tabular}[htb]{l l}
+\citeds{LDM-294} & LSST DM Project Management Plan\\
+\citeds{LDM-503} & DM Test Plan\\
+\citeds{LDM-538} & LSST Level 1 DM Raw Image Archiving Service Test Specification\\
+\end{tabular}
+
+\subsection{References}
+\label{sect:references}
+
+\renewcommand{\refname}{}
+\bibliography{lsst,refs,books,refs_ads}
+
+\subsection{Document Overview}
+\label{sect:docoverview}
+
+Section \ref{sect:configuration} of this document provides details of the \product{} baseline used for this test, including relevant hardware and software configurations.
+Section \ref{sect:personnel} lists the individuals involved in performing the tests.
+Section \ref{sect:overview} provides an overview of the test results, while Section \ref{sect:detailed} provides more detailed results from each individual test case.
+
+\section{Test Configuration}
+\label{sect:configuration}
+
+\subsection{Documents}
+
+This test report refers to the execution of tests RAS-00-00 through RAS-00-30 in \citeds{LDM-538}.
+
+\subsection{Hardware}
+\label{sect:hwconf}
+
+All tests were executed on systems in the LSST Data Facility.
+
+\begin{itemize} 
+\item{
+For LDM-503-4 the test systems used:
+The L1 test stand was used to generate the raw image file and the headers associated with that image.  
+}
+\item {
+For LDM-503-4b the test systems used: 
+The DBB Gateway client was run on user's workstation with no direct access to the L1 test stand outputs.
+The DBB Gateway service was run on a temporary virtual machine running HTTPS/webdav.
+The DBB database was a single-node Oracle system.
+The file systems used were GPFS, but in a temporary location.   
+}
+\end{itemize}
+
+\subsection{Input Data}
+\label{sect:inputdata}
+
+The test file was for RAS-00-20 was manually create.
+
+\section{Personnel}
+\label{sect:personnel}
+
+Test case RAS-00-00 was executed by Jim Parsons, Htut Khine Win, Felipe Menanteau(NCSA) and the other Pathfinder developers.
+
+Test case RAS-00-20  was executed by Michelle Gower (NCSA)
+
+\newpage
+
+\section{Overview of the Test Results}
+\label{sect:overview}
+
+\subsection{Summary Table}
+\label{sect:summarytable}
+
+\begin{longtable} {|p{0.2\textwidth}|p{0.2\textwidth}|p{0.6\textwidth}|}\hline
+{\bf TEST CASE ID} & {\bf PASS/FAIL} & {\bf COMMENTS} \\\hline
+RAS-00-00 & Pass & Refer to \S\ref{sect:detail-RAS-00-00}. \\\hline
+RAS-00-10 & Not Tested & Refer to \S\ref{sect:detail-RAS-00-10}. \\\hline
+RAS-00-20 & Pass & Refer to \S\ref{sect:detail-RAS-00-20}. \\\hline
+RAS-00-30 & Not Tested & Refer to \S\ref{sect:detail-RAS-00-30}. \\\hline
+\end{longtable}
+
+\subsection{Overall Assessment}
+\label{sect:overallassessment}
+
+All test cases that were completed passed.
+This successfully demonstrated the ability to acquire an raw image and then store the file into a prototype of the Data Backbone. There are 2 tests that weren't completed because the componets do not exist at the time of this test.  
+
+
+\subsection{Recommended Improvements}
+\label{sect:recommendations}
+
+\subsubsection{Operational}
+
+\begin{itemize}
+
+  \item{
+    For \milestoneId{}, some tests were carried out manually through spot checks.
+    Further development of verification tools to perform these and additional checks is needed.
+  }
+
+  \item{
+    The handoff of the raw image to the DBB for these tests involved a manual process and a human.  This process will to be improved in the future an automated system.  
+  }
+
+
+\end{itemize}
+
+
+At the time of writing, the middleware software hasn't been completed, so the execution of the raw file image to the DBB will remain basically the same, butler registries might be impacted and used with future execution of these tests.  
+
+
+\newpage
+
+\section{Detailed Test Results}
+\label{sect:detailed}
+
+\subsection{RAS-00-00}
+\label{sect:detail-RAS-00-00}
+\begin{itemize}
+
+  \item{
+
+The test was run by the pathfinder team at NCSA in person.   
+}
+
+  \item{
+The Header Service (a directory on the Header Service machine was used as the EFD Large File Annex where fits skels were pulled from), DM OCS Bridge component, DMCS component, ArchiveController component, and the DQ Capable Forwarder component was used. 
+}
+ \item{
+The system was configured to pull only on CCD '11' from 'raft01' on the DAQ emulator; as this test is attempting to reproduce the intended behavior of the ATS.
+}
+ \item{
+The following SAL messages were exchanged via message simulators for the test (The TCS TARGET/NEW VISIT message was not used...instead we used the \texttt{TAKE{\_}IMAGES} message to kick off what we expected the \texttt{TCS{\_}TARGET} message to do.
+\texttt{TAKE{\_}IMAGES,}
+\texttt{START{\_}INTEGRATION,}
+\texttt{END{\_}READOUT,}
+\texttt{HEADER{\_}READY,}
+\texttt{TAKE{\_}IMAGES{\_}DONE}
+}
+ \item{
+The system performed as expected with a single readout as well as 4 image readouts, each readout just one second apart. 
+The DAQ data was fetched, the header skeleton files were retrieved, the image data was inserted into the header skeleton files and saved out as FITS files. 
+}
+ \item{
+Then sent to the configured destination. 
+It should be noted that the HEADER service was constructing the header file skels from information gleaned from simulated event and telemetry data. 
+}
+ \item{
+It should also be noted that the new and likely final design and implementation of the forwarder component, as a threaded pipeline process that uses messages to communicate between different pipeline segments (threads) worked as expected. 
+}
+ \item{
+The new design being finished, we can immediately benchmark transfer times to the archive (and the prompt processing destination as well). For now, only one forwarder can be used for the DAQ fetch as only one forwarder may connect to the DFAQ, due to there being only one RCE board. 
+}
+ \item{
+However, up to 14 NON DAQ forwarders are available via system configuration. 
+}
+ \item{
+These can transfer files from a configurable non-daq source location, along with formatting them properly, and then send to a configurable destination parameter. Destination can be on the same machine a forwarder is running on, or an Archive Controller destination using key credentials if desired. 
+}
+ \item{
+The Archive Controller component/storage is considered the last staging place for a file before it is ingested into the data backbone - and it is here that validation is checked and journaled.
+}
+\end{itemize}
+
+\begin{itemize}
+
+  \item{SPECIAL NOTE:}
+  \item{The final fits files were not sent to an archiving node. They were sent to a /tmp directory on the DAQ Forwarder machine; } 
+  \item{No checksumming was performed on the files. While this is a configurable option in the system config file, and while it was originally implemented when the Forwarder component was written in Python, the new Forwarder is written in C++ and time was not available to add the code and necessary libs to perform a C++ checksum function, even though the code is implemented on the Archive Controller to validate a checksum; } 
+  \item{ There was not sufficient time to do a proper fault injection test of the system; but these tests will be performed in the extremely near future now that the system is functioning and easily deployable;} 
+\end{itemize}
+
+\subsection{RAS-0010}
+\label{sect:detail-RAS-00-10}
+Not performed as part of milestones LDM-503-4 or LDM-503-4b.
+\subsection{RAS-00-20}
+\label{sect:detail-RAS-00-20}
+
+Within the restrictions for this milestone, the test was successful.
+Following the modified test procedure with the available test
+hardware, an ATS raw image along with information including user
+and md5sum were sent via HTTPs to the delivery area on the test
+DataBackbone gateway machine.   Another program was executed to
+copy the raw file to the appropriate test DBB directory as well as
+save information to the DBB database tables.
+
+\subsection{RAS-00-30}
+\label{sect:detail-RAS-00-30}
+Not performed as part of milestones LDM-503-4 or LDM-503-4b.
+
+
+
+\section{Deviations from test cases/procedures}
+
+\subsection{RAS-00-00}
+Not performed as part of milestones LDM-503-4 or LDM-503-4b.
+\subsection{RAS-00-10}
+none
+\subsection{RAS-00-20}
+\begin{itemize}
+   \item{
+ The test file was manually copied to a non-L1 test stand machine
+to continue rest of test;
+}
+   \item{
+ The test DBB gateway client is manually executed.  Integration
+work to automate the process is future milestone.  
+}
+   \item{
+ The test DBB Gateway service was also manually executed;
+}
+   \item{
+ Since both ends of the process was run by user, only testing user
+authentication (as opposed to service accounts);
+}
+   \item{
+ The test DBB Gateway service stores no science information in the
+DB.  Temporary code in place waiting for Gen3 Butler;
+}
+   \item{
+ There was a single site, single copy with no disaster recovery;
+}
+   \item{
+ There was no monitoring;
+}
+   \item{
+ Did manual checks inside the DBB;
+}
+\end{itemize}
+\subsection {RAS-00-30}
+Not performed as part of milestones LDM-503-4 or LDM-503-4b.
+
+
+\end{document}
